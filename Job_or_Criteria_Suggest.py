@@ -53,7 +53,12 @@ st.markdown(
         text-align: right; /* Align input text to the right */
     }
     .stTextInput > div > div > div {
-        text-align: left; /* Align "Press Enter to Apply" message to the left */
+        text-align: right; /* Default alignment for all divs */
+    }
+    .stTextInput > div > div > div::after {
+        content: "Press Enter to Apply";
+        text-align: left; /* Align message to the left */
+        float: left; /* Force to left side */
     }
     </style>
     """,
