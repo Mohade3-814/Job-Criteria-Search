@@ -39,15 +39,21 @@ df['Cluster'] = kmeans.fit_predict(X)
 # Set up the UI
 st.set_page_config(page_title="سیستم پیشنهاد شغل", layout="wide")
 st.title("🎯 سیستم پیشنهاد شغل یا شاخص")
-st.markdown("این ابزار به شما کمک می‌کند بر اساس ورودی، شغل مناسب یا شاخص‌های مرتبط را پیدا کنید.")
+st.markdown(".این ابزار به شما کمک می‌کند بر اساس ورودی، شغل مناسب یا شاخص‌های مرتبط را پیدا کنید")
 
-# Right-to-left alignment styling
+# Right-to-left alignment styling and moving "Press Enter to Apply" to the left
 st.markdown(
     """
     <style>
     body {
         direction: rtl;
         text-align: right;
+    }
+    .stTextInput > div > div > input {
+        text-align: right; /* Align input text to the right */
+    }
+    .stTextInput > div > div > div {
+        text-align: left; /* Align "Press Enter to Apply" message to the left */
     }
     </style>
     """,
