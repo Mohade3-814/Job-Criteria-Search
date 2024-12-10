@@ -25,7 +25,7 @@ for file_name in os.listdir(folder_path):
 if all_data:
     df = pd.concat(all_data, ignore_index=True)
 else:
-    st.error("No valid files with required columns found")
+    st.error("هیچ فایل معتبری با ستون‌های موردنیاز پیدا نشد")
     st.stop()
 
 # 2. Text preprocessing and vectorization
@@ -37,9 +37,9 @@ kmeans = KMeans(n_clusters=3, random_state=0)
 df['Cluster'] = kmeans.fit_predict(X)
 
 # Set up the UI
-st.set_page_config(page_title="Job Suggestion System", layout="wide")
-st.title("🎯 Job or Criteria Suggestion System")
-st.markdown(".This tool helps you find suitable jobs or related criteria based on your input")
+st.set_page_config(page_title="سیستم پیشنهاد شغل", layout="wide")
+st.title("🎯 سیستم پیشنهاد شغل یا شاخص")
+st.markdown(".این ابزار به شما کمک می‌کند بر اساس ورودی، شغل مناسب یا شاخص‌های مرتبط را پیدا کنید")
 
 # Right-to-left alignment styling
 st.markdown(
@@ -55,11 +55,11 @@ st.markdown(
 )
 
 # Choose the search type
-search_type = st.radio("Choose the type of search:", ["Search by Criteria", "Search by Job Title"])
+search_type = st.radio("نوع جستجو را انتخاب کنید:", ["جستجو بر اساس شاخص", "جستجو بر اساس شغل"])
 
-if search_type == "Search by Criteria":
-    st.markdown("#### Enter your criteria, separated by commas (,):")
-    user_input = st.text_input("Criteria:", "")
+if search_type == "جستجو بر اساس شاخص":
+    st.markdown("#### شاخص‌های خود را با کاما (,) از هم جدا کنید:")
+    user_input = st.text_input("شاخص‌ها:", "")
     if user_input:
         # Convert input into a list
         input_list = [item.strip() for item in user_input.split(",")]
@@ -77,20 +77,20 @@ if search_type == "Search by Criteria":
 
         # Sort and display suggested jobs
         suggested_jobs = df.sort_values(by="Average_Similarity", ascending=False)
-        st.markdown("### ✅ Suggested Jobs:")
+        st.markdown("### ✅ شغل‌های پیشنهادی:")
         for index, row in suggested_jobs.drop_duplicates(subset=["سمت"]).head(10).iterrows():
-            st.success(f"**{row['سمت']}** (Similarity Score: {row['Average_Similarity']:.2f})")
+            st.success(f"**{row['سمت']}** (امتیاز شباهت: {row['Average_Similarity']:.2f})")
 
-elif search_type == "Search by Job Title":
-    st.markdown("#### Enter the job title:")
-    job_input = st.text_input("Job Title:", "")
+elif search_type == "جستجو بر اساس شغل":
+    st.markdown("#### عنوان شغل خود را وارد کنید:")
+    job_input = st.text_input("شغل:", "")
     if job_input:
         # Filter data for the given job title
         filtered_data = df[df["سمت"].str.contains(job_input, case=False, na=False)]
 
         if not filtered_data.empty:
-            st.markdown("### ✅ Related Criteria:")
+            st.markdown("### ✅ شاخص‌های مرتبط:")
             for index, row in filtered_data.iterrows():
                 st.info(f"**{row['شاخص']}**")
         else:
-            st.warning("Job not found. Please enter a more specific title.")
+            st.warning(".شغل موردنظر پیدا نشد. لطفاً عنوان دقیق‌تری وارد کنید")
