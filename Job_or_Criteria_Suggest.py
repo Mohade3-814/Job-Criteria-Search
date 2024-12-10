@@ -5,8 +5,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 import os
 import streamlit as st
 
-# 1. Load Excel files
-folder_path = "excel_files"  # Path to the folder containing Excel files
+# Load Excel files
+folder_path = "excel_files"  
 all_data = []
 
 # Read Excel files
@@ -28,18 +28,18 @@ else:
     st.error("هیچ فایل معتبری با ستون‌های موردنیاز پیدا نشد")
     st.stop()
 
-# 2. Text preprocessing and vectorization
+# Text preprocessing and vectorization
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(df["شاخص"])
 
-# 3. Clustering
+# Clustering
 kmeans = KMeans(n_clusters=3, random_state=0)
 df['Cluster'] = kmeans.fit_predict(X)
 
 # Set up the UI
 st.set_page_config(page_title="سیستم پیشنهاد شغل", layout="wide")
 st.title("🎯 سیستم پیشنهاد شغل یا شاخص")
-st.markdown(".این ابزار به شما کمک می‌کند بر اساس ورودی، شغل مناسب یا شاخص‌های مرتبط را پیدا کنید")
+st.markdown("این ابزار به شما کمک می‌کند بر اساس ورودی، شغل مناسب یا شاخص‌های مرتبط را پیدا کنید.")
 
 # Right-to-left alignment styling
 st.markdown(
