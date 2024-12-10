@@ -41,7 +41,7 @@ st.set_page_config(page_title="سیستم پیشنهاد شغل", layout="wide")
 st.title("🎯 سیستم پیشنهاد شغل یا شاخص")
 st.markdown(".این ابزار به شما کمک می‌کند بر اساس ورودی، شغل مناسب یا شاخص‌های مرتبط را پیدا کنید")
 
-# Right-to-left alignment styling and moving "Press Enter to Apply" to the left
+# CSS to remove the "Press Enter to Apply" message
 st.markdown(
     """
     <style>
@@ -49,16 +49,11 @@ st.markdown(
         direction: rtl;
         text-align: right;
     }
-    .stTextInput > div > div > input {
-        text-align: right; /* Align input text to the right */
-    }
     .stTextInput > div > div > div {
-        text-align: right; /* Default alignment for all divs */
+        display: none; /* Hides the "Press Enter to Apply" message */
     }
-    .stTextInput > div > div > div::after {
-        content: "Press Enter to Apply";
-        text-align: left; /* Align message to the left */
-        float: left; /* Force to left side */
+    .stTextInput > div > div > input {
+        text-align: right; /* Keeps the input text aligned to the right */
     }
     </style>
     """,
