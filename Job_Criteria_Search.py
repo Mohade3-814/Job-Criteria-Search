@@ -23,7 +23,7 @@ for file_name in os.listdir(folder_path_jobs):
 if all_jobs:
     jobs_df = pd.concat(all_jobs, ignore_index=True)
 else:
-    st.error("هیچ فایل شغلی معتبری پیدا نشد.")
+    st.error("error while uploading files")
     st.stop()
 
 # Load personnel data
@@ -65,7 +65,7 @@ personnel_X = vectorizer.transform(personnel_df["شاخص"])
 # Set up the UI
 st.set_page_config(page_title="سیستم پیشنهاد شغل", layout="wide")
 st.title("🎯 سیستم پیشنهاد فرد مناسب")
-st.markdown(".این ابزار به شما کمک می‌کند افراد مناسب برای شاخص‌های موردنظر را پیدا کنید")
+st.markdown("این ابزار به شما کمک می‌کند افراد مناسب برای شاخص‌های موردنظر را پیدا کنید.")
 
 # CSS for right-to-left alignment
 st.markdown(
